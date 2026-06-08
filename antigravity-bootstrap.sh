@@ -39,8 +39,8 @@ if [ ! -f ".vercel/project.json" ]; then
     echo -e "${BLUE}Enlazando proyecto con Vercel...${NC}"
     vercel link --yes --scope mario-vicente-s-projects
 fi
-VERCEL_ORG_ID=$(cat .vercel/project.json | grep '"orgId"' | awk -F '"' '{print $4}')
-VERCEL_PROJECT_ID=$(cat .vercel/project.json | grep '"projectId"' | awk -F '"' '{print $4}')
+VERCEL_ORG_ID=$(jq -r .orgId .vercel/project.json)
+VERCEL_PROJECT_ID=$(jq -r .projectId .vercel/project.json)
 
 echo -e "\n${BLUE}[4/5] Inyectando Secretos en GitHub Actions...${NC}"
 gh secret set VERCEL_TOKEN -b "$VERCEL_TOKEN" -R "$GITHUB_USER/$REPO_NAME"
