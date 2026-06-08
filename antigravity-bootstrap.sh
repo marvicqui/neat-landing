@@ -37,7 +37,7 @@ VERCEL_TOKEN=$(cat "$VERCEL_TOKEN_PATH" | grep '"token"' | head -1 | awk -F '"' 
 # Verificando si existe .vercel/project.json para extraer ORG_ID y PROJECT_ID
 if [ ! -f ".vercel/project.json" ]; then
     echo -e "${BLUE}Enlazando proyecto con Vercel...${NC}"
-    vercel link --yes
+    vercel link --yes --scope mario-vicente-s-projects
 fi
 VERCEL_ORG_ID=$(cat .vercel/project.json | grep '"orgId"' | awk -F '"' '{print $4}')
 VERCEL_PROJECT_ID=$(cat .vercel/project.json | grep '"projectId"' | awk -F '"' '{print $4}')
