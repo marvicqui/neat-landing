@@ -32,7 +32,7 @@ if [ ! -f "$VERCEL_TOKEN_PATH" ]; then
     echo -e "${RED}Error: Vercel CLI auth.json no encontrado en $VERCEL_TOKEN_PATH${NC}"
     exit 1
 fi
-VERCEL_TOKEN=$(cat "$VERCEL_TOKEN_PATH" | grep '"token"' | head -1 | awk -F '"' '{print $4}')
+VERCEL_TOKEN=$(jq -r .token "$VERCEL_TOKEN_PATH")
 
 # Verificando si existe .vercel/project.json para extraer ORG_ID y PROJECT_ID
 if [ ! -f ".vercel/project.json" ]; then
